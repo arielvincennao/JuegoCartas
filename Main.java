@@ -9,7 +9,14 @@ public class Main {
 		
 		Juego juego = new Juego(jugador1, jugador2);
 		
-		juego.Jugar();
+		Carta c = new Carta();
+		
+		System.out.println(c.getNombre());
+		
+		String mazoPath = "./superheroes.json";
+        c.cartaRandom(mazoPath);
+		
+		juego.Jugar(jugador1, jugador2);
 
 	}
 

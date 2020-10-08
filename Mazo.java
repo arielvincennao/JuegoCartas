@@ -3,25 +3,24 @@ import java.util.ArrayList;
 
 public class Mazo {
 	
-	private int numeroCartas;	
 	private ArrayList <Carta> cartas;	
 	//Crear un contador?
 
-	public Mazo(int numeroCartas) {
-		this.numeroCartas = numeroCartas;
+	public Mazo() {
 		this.cartas = new ArrayList<Carta>(); 
 	}
 
 	public void addCarta(Carta C){
 		this.cartas.add(C);
 	}
-
-	public int getNumeroCartas() {
-		return numeroCartas;
+	
+	public void verificarCartas(){
+		//Si está todo OK las reparte
 	}
-
-	public void setNumeroCartas(int numeroCartas) {
-		this.numeroCartas = numeroCartas;
+	
+	
+	public void repartirCartas(){
+		//repartir cartas
 	}
 	
 	

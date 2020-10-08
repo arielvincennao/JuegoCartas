@@ -1,10 +1,14 @@
+import java.util.ArrayList;
+
 public class Jugador {
 
 	private String nombre;
-	private Mazo mazo;
+	private ArrayList <Carta> cartas;
+	private Object atributoRandom;
 	
 	public Jugador(String nombre) {
 		this.nombre = nombre;
+		Mazo m = new Mazo();
 		//this.mazo = mazo; Crear un metodo para crear el mazo dependiendo de las cartas que haya
 	}
 
@@ -15,14 +19,17 @@ public class Jugador {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-
-	public Mazo getMazo() {
-		return mazo;
-	}
-
-	public void setMazo(Mazo mazo) {
-		this.mazo = mazo;
-	}
 	
+	public Object getAtributoRandom() {
+		return atributoRandom;
+	}
+
+	public void setAtributoRandom(Object atributoRandom) {
+		this.atributoRandom = atributoRandom;
+	}
+
+	public void elegirAtributoRandom(){
+		this.setAtributoRandom("fuerza"); //Atributo random de la primera carta del arreglo json
+	}
 	
 }
