@@ -22,6 +22,11 @@ public class Mazo {
 	public void repartirCartas(){
 		//repartir cartas
 	}
+
+	@Override
+	public String toString() {
+		return "Mazo [cartas=" + cartas + "]";
+	}
 	
 	
 	/*public ArrayList<Carta> getCartas() {
@@ -31,6 +36,7 @@ public class Mazo {
 	public void setCartas(ArrayList<Carta> cartas) {
 		this.cartas = cartas;
 	}*/
+	
 	
 	
 

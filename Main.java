@@ -6,17 +6,12 @@ public class Main {
 		//Crear jugadores
 		Jugador jugador1 = new Jugador("Juan");
 		Jugador jugador2 = new Jugador("Pepe");
-		
-		Juego juego = new Juego(jugador1, jugador2);
-		
-		Carta c = new Carta();
-		
-		System.out.println(c.getNombre());
-		
 		String mazoPath = "./superheroes.json";
-        c.cartaRandom(mazoPath);
 		
-		juego.Jugar(jugador1, jugador2);
+		Juego juego = new Juego(jugador1, jugador2, 5, mazoPath);
+		
+		
+		juego.Jugar();
 
 	}
 
