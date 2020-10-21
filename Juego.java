@@ -48,6 +48,8 @@ public class Juego {
 		this.j2 = j2;
 	}
 
+
+
 	public int getNumeroRondasMax() {
 		return numeroRondasMax;
 	}
@@ -68,15 +70,36 @@ public class Juego {
 	public void Jugar(){
 		//For con el numero de rondas
 		
+		System.out.println(" ");
+		System.out.println(">>> El mazo generado para jugar es el siguiente:");
+		System.out.println(" ");
 		this.generarMazo();
-		
-		mazo.repartirCartas();
-		
 		System.out.println(mazo.toString());
+		
+		System.out.println(" ");
+		System.out.println("-----------------------------------");
+		System.out.println(" ");
+		
+		System.out.println("En el mazo hay " + mazo.getCantidadCartas() + " cartas totales.");
+		System.out.println("Estas seran repartidas entre " + j1.getNombre() + " y " + j2.getNombre());
+		
+		System.out.println(" ");
+		System.out.println("-----------------------------------");
+		System.out.println(" ");
+		
+		this.repartirMazo(mazo, j1, j2);
+		
+		
+	//	System.out.println("Las cartas del jugador 1 " + j1.getNombre() + " son: ");
+	//	System.out.println(j1.getMazo());
+		
+	//	System.out.println("Las cartas del jugador 2 " + j2.getNombre() + " son: ");
+	//	System.out.println(j2.getMazo());
+		
+		j1.elegirAtributoRandom();
 		
 		for(int i = 1; i<=getNumeroRondasMax(); i++){
 			System.out.println("------- Ronda " + i + " -------");
-			j1.elegirAtributoRandom();
 			System.out.println("El jugador " + j1.getNombre() + " selecciona competir por el atributo " + j1.getAtributoRandom());
 		}
 
@@ -95,7 +118,6 @@ public class Juego {
 	
 	public void generarMazo(){
 		//URL url = getClass().getResource(jsonFile);
-    	int cont = 0;
         File jsonInputFile = new File(this.mazoPath);
         InputStream is;
         try {
@@ -118,15 +140,14 @@ public class Juego {
                     }
                     
                     Carta c = new Carta(nombreCarta, listaAtributos);
-                    
-                    mazo.addCarta(c); 
-                
-                    //String NAtributo = atributos.get(nombreAtributo);
+                    if(mazo.verificarCarta(c)){
+                        mazo.addCarta(c); 
+                    }else{
+                    	System.out.println("Se encontró una carta trampa " + c);
+                    }
 
-                cont++;
 
             }
-            System.out.println("Las cartas en el mazo son: " + cont); //El mazo sabe todas las que hay
             reader.close();
 
         } catch (FileNotFoundException e) {
@@ -136,5 +157,26 @@ public class Juego {
 
 	}
 
+	public void repartirMazo(Mazo mazo, Jugador j1, Jugador j2){
+		Mazo mazoJugador1 = new Mazo();
+		Mazo mazoJugador2 = new Mazo();
+		
+		//Recorre el mazo y reparte
+		for(int i = 0; i< mazo.getCantidadCartas(); i++){
+			
+			if((i % 2 == 0) || (i == 0)){
+				//System.out.println(mazo.getCarta(i));				//reparte en j1
+				mazoJugador1.addCarta((Carta) mazo.getCarta(i));
+				j1.setMazo(mazoJugador1);
+			}else{
+				//System.out.println(mazo.getCarta(i));				//reparte en j2
+				mazoJugador2.addCarta((Carta) mazo.getCarta(i));
+				j2.setMazo(mazoJugador1);
+			}
+
+		}
+		System.out.println(mazoJugador1.getCantidadCartas());
+		System.out.println(mazoJugador2.getCantidadCartas());
+	}
 	
 }

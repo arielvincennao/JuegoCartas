@@ -18,7 +18,6 @@ public class Carta {
 	}
 
 
-
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
@@ -27,6 +26,14 @@ public class Carta {
 
 	public ArrayList<Atributo> getAtributos() {
 		return atributos;
+	}
+	
+	public ArrayList<String> getNombresAtributos(){
+		ArrayList<String> nombresAtributos = new ArrayList<String>();
+		for( int i = 0; i<this.atributos.size(); i++){
+			nombresAtributos.add(atributos.get(i).getNombre());
+		}
+		return nombresAtributos;
 	}
 
 
