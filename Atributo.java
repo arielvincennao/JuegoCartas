@@ -18,8 +18,6 @@ public class Atributo {
 	}
 
 	
-	
-	
 	public int getValor() {
 		return valor;
 	}
