@@ -1,17 +1,24 @@
 import java.util.ArrayList;
+import java.util.Random;
 
 
 public class Mazo {
 	
 	private ArrayList <Carta> cartas;	
-	//Crear un contador?
+	private ArrayList <Pocima> pocimas;
+
 
 	public Mazo() {
 		this.cartas = new ArrayList<Carta>(); 
+		this.pocimas = new ArrayList<Pocima>();
 	}
 
-	public void addCarta(Carta c){
+	public void add(Carta c){
 		this.cartas.add(c);
+	}
+	
+	public void delete(Carta c){
+		this.cartas.remove(c);
 	}
 	
 	public boolean verificarCarta(Carta c){
@@ -27,17 +34,9 @@ public class Mazo {
 		}
 	}
 	
-	
 
-	public ArrayList<Carta> getCartas() {
-		return cartas;
-	}
-
-	public void setCartas(ArrayList<Carta> cartas) {
-		this.cartas = cartas;
-	}
 	
-	public Object getCarta(int pos){
+	public Carta getCarta(int pos){
 		return cartas.get(pos);
 	}
 
@@ -45,10 +44,42 @@ public class Mazo {
 		return cartas.size(); //Devuelve la cantidad de cartas en el mazo
 	}
 	
+	public void addPocima(Pocima p){
+		this.pocimas.add(p);			
+	}
+	
+	public void deletePocima(int pos){
+		this.pocimas.remove(pos);
+	}
+	
+	public ArrayList<Pocima> getPocimas(){
+		ArrayList<Pocima> pocimasCopia = new ArrayList<>(this.pocimas);
+		return pocimasCopia;
+	}
+	
+	public int cantPocimas(){
+		return this.getPocimas().size();
+	}
+	
+	public int ElegirPocimaRandom(){
+		int maxPociones = this.cantPocimas();//Cant de pociones en el juego
+		Random rand = new Random();
+		int numeroPocimaElegida = rand.nextInt(maxPociones); //Cant de pociones -1
+		
+		return numeroPocimaElegida;
+	}
+	
 	
 	@Override
 	public String toString() {
 		return "Mazo [cartas=" + cartas + "]";
+	}
+
+	public void repartirPocima(int i) {
+		int nrandom;
+		nrandom = this.ElegirPocimaRandom();
+		this.getCarta(i).setPocima(this.getPocimas().get(nrandom)); //random en i
+		this.deletePocima(nrandom);	//random en i
 	}
 	
 
