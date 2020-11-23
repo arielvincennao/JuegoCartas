@@ -7,6 +7,10 @@ public class Atributo {
 		this.nombre = nombre;
 		this.valor = valor;
 	}
+	
+	public Atributo(String nombre) {
+		this.nombre = nombre;
+	}
 
 
 	public String getNombre() {

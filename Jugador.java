@@ -2,12 +2,19 @@ public class Jugador {
 
 	private String nombre;
 	private Mazo mazo;
-	private Object atributoRandom; //El jugador 
+	private Estrategia estrategia;
+
 	
 	public Jugador(String nombre) {
 		this.nombre = nombre;
 		this.mazo = new Mazo();
-		//this.mazo = mazo; Crear un metodo para crear el mazo dependiendo de las cartas que haya
+		this.estrategia = new EstrategiaTimbero();  //Por defecto se juega random
+	}
+	
+	public Jugador(String nombre, Estrategia estrategia) {
+		this.nombre = nombre;
+		this.estrategia = estrategia;			//Eligiendo estrategia
+		this.mazo = new Mazo();
 	}
 
 	public String getNombre() {
@@ -25,17 +32,34 @@ public class Jugador {
 	public void setMazo(Mazo mazo) {
 		this.mazo = mazo;
 	}
-
-	public Object getAtributoRandom() {
-		return atributoRandom;
+	
+	public Estrategia getEstrategia() {
+		return this.estrategia;
+	}
+	
+	public void setEstrategia(Estrategia estrategia) {
+		this.estrategia = estrategia;
+	}
+	
+	public void addCarta(Carta c){
+		this.mazo.add(c);
+	}
+	
+	public void deleteCarta(Carta c){
+		this.mazo.delete(c);
 	}
 
-	public void setAtributoRandom(Object atributoRandom) {
-		this.atributoRandom = atributoRandom;
+	public Carta getPrimerCarta(){
+		return mazo.getCarta(0);	//Get para agarrar la primer carta del mazo del jugador
 	}
-
-	public void elegirAtributoRandom(){
-		this.setAtributoRandom("fuerza"); //Atributo random de la primera carta del arreglo json
+	
+	public int getCantidadDeCartasEnMazo(){		//Devuelve la cantidad de cartas en el mazo del jugador
+		return mazo.getCantidadCartas();
 	}
+	
+	public Atributo atributoElegido(){
+		return this.getEstrategia().elegirEstrategia(this.getPrimerCarta());
+	}
+	
 	
 }
